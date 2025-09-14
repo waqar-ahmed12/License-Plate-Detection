@@ -1,0 +1,17 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore virtual environments
+ocr_env/bin/
+ocr_env/lib/
+ocr_env/lib64/
+ocr_env/pyvenv.cfg
+ocr_env/share/
+
+# Ignore other heavy/unnecessary stuff
+*.log
+*.tmp
+
+# Ignore system files
+.DS_Store

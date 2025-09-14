@@ -1,0 +1,23 @@
+# Ignore Python virtual environment folders
+ocr_env/bin/
+ocr_env/lib/
+ocr_env/lib64/
+ocr_env/pyvenv.cfg
+ocr_env/include/
+ocr_env/share/
+
+# Ignore caches
+__pycache__/
+*.pyc
+
+# Ignore data and large files
+not_interpolated/
+interpolated/
+'csv folder'/
+*.csv
+*.mp4
+*.avi
+*.log
+
+# Ignore IDE/OS junk
+.DS_Store

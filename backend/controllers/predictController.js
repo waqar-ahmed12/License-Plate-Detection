@@ -49,11 +49,14 @@ function convertToH264(inputPath, outputPath)
       outputPath
     ]);
 
+<<<<<<< HEAD
     // Add this to see the conversion progress in your terminal!
     ffmpeg.stderr.on("data", (data) => {
       console.log(`[FFmpeg]: ${data.toString().trim()}`);
     });
 
+=======
+>>>>>>> f4a5a43f71a7cb7935551583041c8770f6c818bd
     ffmpeg.on("close", (code) => {
       if (code === 0) resolve();
       else reject(new Error(`ffmpeg failed with code ${code}`));
@@ -62,6 +65,7 @@ function convertToH264(inputPath, outputPath)
 }
 
 
+<<<<<<< HEAD
 // async function predictVideo(req, res)
 // {
 //   try 
@@ -172,6 +176,13 @@ async function predictVideo(req, res) {
   try {
     // Paths
     const pythonPath = path.join(ocr_envPath, "Scripts", "python.exe");
+=======
+async function predictVideo(req, res)
+{
+  try 
+  {
+    const pythonPath = path.join(ocr_envPath, "bin/python");
+>>>>>>> f4a5a43f71a7cb7935551583041c8770f6c818bd
     const scriptPath = path.join(ocr_envPath, "modifiedMain.py");
     const missingValsScript = path.join(ocr_envPath, "addMissingData.py");
     const visualizeScript = path.join(ocr_envPath, "visualize.py");
@@ -179,6 +190,7 @@ async function predictVideo(req, res) {
     const uploadedPath = req.file.path;
     const fileName = path.basename(uploadedPath, path.extname(uploadedPath));
 
+<<<<<<< HEAD
     const interpolatedPath = path.join(ocr_envPath, "interpolated", `${fileName}.csv`);
     const mp4Path = path.join(ocr_envPath, "interpolated", `${fileName}.mp4`); // Raw output from Python
     const modifiedMp4 = path.join(ocr_envPath, "interpolated", `${fileName}_h264.mp4`); // Final FFmpeg output
@@ -188,11 +200,42 @@ async function predictVideo(req, res) {
     // ==========================================
     if (fs.existsSync(modifiedMp4)) {
       console.log("Found existing H.264 result, skipping processing.");
+=======
+    const interpolatedPath = path.join(
+      ocr_envPath,
+      "interpolated",
+      `${fileName}.csv`
+    );
+    const mp4Path = path.join(ocr_envPath, "interpolated", `${fileName}.mp4`);
+
+    const modifiedMp4 = path.join(  // some file structure
+        ocr_envPath,
+        "interpolated",
+        `${fileName}_h264.mp4`
+      );
+
+    // Step 0: If interpolated CSV already exists     fs.existsSync(interpolatedPath) && 
+    if (fs.existsSync(mp4Path) || fs.existsSync(modifiedMp4)) // meaning if there is a csv and the mp4
+    {
+      console.log("Found existing result, skipping processing");      
+
+      // only convert if not already converted
+      if (!fs.existsSync(modifiedMp4)) 
+      {
+        console.log("Converting existing mp4 to H.264...");
+        await convertToH264(mp4Path, modifiedMp4);
+      }
+
+>>>>>>> f4a5a43f71a7cb7935551583041c8770f6c818bd
       res.setHeader("Content-Type", "video/mp4");
       res.setHeader("Content-Disposition", "inline");
       return fs.createReadStream(modifiedMp4).pipe(res);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4a5a43f71a7cb7935551583041c8770f6c818bd
     // 1. Run modifiedMain.py
     console.log("Running modifiedMain.py...");
     await runPython(pythonPath, scriptPath, [uploadedPath]);
@@ -202,10 +245,15 @@ async function predictVideo(req, res) {
     const csvPath = path.join(ocr_envPath, "csv folder", `${fileName}.csv`);
     await runPython(pythonPath, missingValsScript, [csvPath]);
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> f4a5a43f71a7cb7935551583041c8770f6c818bd
     // 3. Run visualize.py
     console.log("Running visualize.py...");
     await runPython(pythonPath, visualizeScript, [interpolatedPath]);
 
+<<<<<<< HEAD
     // ==========================================
     // FIX 2: Validate the Raw MP4 before passing to FFmpeg
     // ==========================================
@@ -229,20 +277,58 @@ async function predictVideo(req, res) {
     // 5. Send MP4 result
     if (fs.existsSync(modifiedMp4)) {
       console.log("Conversion complete! Sending final video.");
+=======
+    // 4. Convert raw mp4 to H.264 encoded mp4
+    const ffmpeg = require("child_process").spawnSync;
+    const rawMp4 = path.join(
+      ocr_envPath,
+      "interpolated",
+      `${fileName}.mp4`
+    );
+
+
+    console.log("Converting to H.264...");
+    ffmpeg("ffmpeg", [
+      "-y",           
+      "-i", rawMp4,   
+      "-c:v", "libx264", 
+      "-preset", "fast",
+      "-crf", "23",
+      modifiedMp4
+    ]);
+
+    // 5. Send MP4 result
+    if (fs.existsSync(modifiedMp4)) 
+    {
+>>>>>>> f4a5a43f71a7cb7935551583041c8770f6c818bd
       res.setHeader("Content-Type", "video/mp4");
       res.setHeader("Content-Disposition", "inline");
       const stream = fs.createReadStream(modifiedMp4);
       stream.pipe(res);
+<<<<<<< HEAD
     } else {
       res.status(500).send("Error: Encoded video not found after FFmpeg finished.");
     }
 
   } catch (err) {
     console.error(`Pipeline Error: ${err.message}`);
+=======
+    } 
+    else 
+      res.status(500).send("Error: Encoded video not found")
+
+  }
+  catch (err) 
+  {
+>>>>>>> f4a5a43f71a7cb7935551583041c8770f6c818bd
     res.status(500).json({ error: "Pipeline failed", details: err.message });
   }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4a5a43f71a7cb7935551583041c8770f6c818bd
 function getCsv(req, res) 
 {
   const { fileName } = req.params;

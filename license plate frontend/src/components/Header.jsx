@@ -23,7 +23,11 @@ function Header() {
           {/* Right Section (Status) */}
           <div className="flex items-center space-x-4">
             <div className="text-sm text-gray-500">
+<<<<<<< HEAD
               {/* Status:{' '} */}
+=======
+              Status:{' '}
+>>>>>>> f4a5a43f71a7cb7935551583041c8770f6c818bd
               <span
                 className={`font-medium ${
                   status === 'System Ready'

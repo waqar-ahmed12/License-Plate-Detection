@@ -1,0 +1,19 @@
+src/
+ └── components/
+      ├── Header.jsx
+      ├── Navigation.jsx
+      ├── StatusIcon.jsx
+      ├── Upload/
+      │    └── VideoUploadTab.jsx
+      ├── Dashboard/
+      │    ├── DashboardTab.jsx
+      │    ├── StatsCard.jsx
+      │    └── VideoTable.jsx
+      ├── Results/
+      │    ├── ResultsTab.jsx
+      │    ├── VideoComparison.jsx
+      │    ├── DetectionStats.jsx
+      │    └── DetectionTable.jsx
+      └── common/
+           └── FileInput.jsx
+ App.jsx

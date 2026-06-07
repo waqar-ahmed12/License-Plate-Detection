@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/c106d3d6-3790-452b-8739-453b7989d94e
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+##  Tech Stack & Architecture
 
 * **Computer Vision & ML:** Python, Ultralytics YOLOv8, Tesseract/EasyOCR, OpenCV
 * **Object Tracking:** SORT (Simple Online and Realtime Tracking)
@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/c106d3d6-3790-452b-8739-453b7989d94e
 
 ---
 
-## ⚙️ Quick Start Installation (Windows)
+##  Quick Start Installation (Windows)
 
 To make setting up the development environment as frictionless as possible, this repository includes an automated PowerShell setup script.
 
